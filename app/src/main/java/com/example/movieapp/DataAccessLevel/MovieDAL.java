@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MovieDAL {
     private Connection connect;
@@ -54,6 +55,7 @@ public class MovieDAL {
                 throwables.printStackTrace();
             }
         }
+        Collections.reverse(movies);
         return movies;
     }
 }

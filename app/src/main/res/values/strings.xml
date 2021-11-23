@@ -6,5 +6,7 @@
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="home_page">HomePage</string>
-    <string name="newest">Newest Movies:</string>
+    <string name="newest">New Movies</string>
+    <string name="description">Description:</string>
+    <string name="play">Play!</string>
 </resources>

@@ -23,13 +23,14 @@
 
     <EditText
         android:id="@+id/usernameTextRegister"
-        android:layout_width="145dp"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edittextrounded"
         android:ems="10"
+        android:fontFamily="sans-serif-black"
         android:hint="@string/username"
-        android:textColorHint="#474242"
         android:inputType="textEmailAddress"
+        android:textColorHint="#474242"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,10 +40,11 @@
 
     <EditText
         android:id="@+id/emailTextRegister"
-        android:layout_width="145dp"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edittextrounded"
         android:ems="10"
+        android:fontFamily="sans-serif-black"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:textColorHint="#474242"
@@ -55,13 +57,14 @@
 
     <EditText
         android:id="@+id/passwordTextRegister"
-        android:layout_width="145dp"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edittextrounded"
         android:ems="10"
+        android:fontFamily="sans-serif-black"
         android:hint="@string/password"
-        android:textColorHint="#474242"
         android:inputType="textPassword"
+        android:textColorHint="#474242"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/divider4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,9 +74,10 @@
 
     <Button
         android:id="@+id/registerButtonRegister"
-        android:layout_width="145dp"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:background="@drawable/buttonrounded"
+        android:fontFamily="sans-serif-black"
         android:text="@string/register_button"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

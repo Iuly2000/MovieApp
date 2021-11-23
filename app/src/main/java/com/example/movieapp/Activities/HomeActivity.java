@@ -1,14 +1,20 @@
 package com.example.movieapp.Activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.movieapp.DataAccessLevel.MovieDAL;
 import com.example.movieapp.EntityLevel.Movie;
 import com.example.movieapp.Helpers.MoviesPagerAdapter;
+import com.example.movieapp.Helpers.MoviesRecyclerAdapter;
 import com.example.movieapp.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -19,6 +25,8 @@ import java.util.TimerTask;
 public class HomeActivity extends AppCompatActivity {
     private MoviesPagerAdapter moviesPagerAdapter;
     private ViewPager viewPager;
+    private RecyclerView recyclerView;
+    private MoviesRecyclerAdapter moviesRecyclerAdapter;
     private List<Movie> moviesList;
     private MovieDAL movieDAL = new MovieDAL();
     private TabLayout tabLayout;
@@ -30,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         this.tabLayout = findViewById(R.id.tab_indicator);
         this.moviesList = movieDAL.GetAllMovies();
         this.SetBannerMoviesPagerAdapter(moviesList);
+        this.SetMoviesRecyclerAdapter(moviesList);
     }
 
     private void SetBannerMoviesPagerAdapter(List<Movie> movieList) {
@@ -37,9 +46,16 @@ public class HomeActivity extends AppCompatActivity {
         this.moviesPagerAdapter = new MoviesPagerAdapter(this, movieList);
         this.viewPager.setAdapter(moviesPagerAdapter);
         this.tabLayout.setupWithViewPager(viewPager);
-        Timer sliderTimer=new Timer();
-        sliderTimer.scheduleAtFixedRate(new AutoSlider(),4000,6000);
-        this.tabLayout.setupWithViewPager(viewPager,true);
+        Timer sliderTimer = new Timer();
+        sliderTimer.scheduleAtFixedRate(new AutoSlider(), 4000, 6000);
+        this.tabLayout.setupWithViewPager(viewPager, true);
+    }
+
+    private void SetMoviesRecyclerAdapter(List<Movie> movieList) {
+        this.recyclerView = findViewById(R.id.movies_recyclerView);
+        this.moviesRecyclerAdapter = new MoviesRecyclerAdapter(this, movieList);
+        recyclerView.setAdapter(moviesRecyclerAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     class AutoSlider extends TimerTask {
@@ -49,8 +65,7 @@ public class HomeActivity extends AppCompatActivity {
             HomeActivity.this.runOnUiThread(() -> {
                 if (viewPager.getCurrentItem() < moviesList.size() - 1) {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                }
-                else{
+                } else {
                     viewPager.setCurrentItem(0);
                 }
             });
