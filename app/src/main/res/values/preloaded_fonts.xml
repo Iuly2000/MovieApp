@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/astloch</item>
+        <item>@font/bangers</item>
+        <item>@font/carter_one</item>
+        <item>@font/elsie</item>
+        <item>@font/leckerli_one</item>
+        <item>@font/mountains_of_christmas</item>
+        <item>@font/mrs_saint_delafield</item>
+        <item>@font/spicy_rice</item>
+        <item>@font/trade_winds</item>
+        <item>@font/wendy_one</item>
+    </array>
+</resources>
