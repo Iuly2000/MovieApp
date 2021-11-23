@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="400dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -18,25 +18,24 @@
                 android:id="@+id/description_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="11dp"
                 android:ems="10"
                 android:text="@string/description"
-                android:textSize="24sp"
                 android:textColor="@color/black"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/movie_description"
-                app:layout_constraintEnd_toStartOf="@+id/playButton"
+                app:layout_constraintEnd_toEndOf="@+id/image"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image" />
 
             <TextView
                 android:id="@+id/movie_description"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textSize="20sp"
                 android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/description_label"
                 app:layout_constraintTop_toBottomOf="@+id/description_label" />
 
@@ -55,32 +54,17 @@
                 android:id="@+id/playButton"
                 android:layout_width="135dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="39dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="17dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/buttonrounded"
                 android:fontFamily="sans-serif-black"
                 android:text="@string/play"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/movie_description"
-                app:layout_constraintTop_toBottomOf="@+id/description_label"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <androidx.constraintlayout.widget.Barrier
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="400dp"
-                android:layout_marginEnd="411dp"
-                android:visibility="visible"
-                app:barrierDirection="top"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/movie_description"
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
