@@ -19,10 +19,10 @@ public class ConnectionHelper extends Application {
 
     public Connection connectionClass() {
         try {
-            ipString = "192.168.0.171";
-            this.database = "MovieUp!";
-            this.uname = "Iuly";
-            this.pass = "test123";
+            ipString = "SQL5080.site4now.net";
+            this.database = "db_a7d320_movieup";
+            this.uname = "db_a7d320_movieup_admin";
+            this.pass = "Database123!!!";
             this.port = "1433";
 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

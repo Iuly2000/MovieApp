@@ -48,7 +48,7 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
             intent.putExtra("name",movieList.get(position).getName());
             intent.putExtra("description",movieList.get(position).getDescription());
             intent.putExtra("image",movieList.get(position).getImage());
-            intent.putExtra("link",movieList.get(position).getImage());
+            intent.putExtra("link",movieList.get(position).getLink());
             intent.putExtra("releaseYear",movieList.get(position).getReleaseYear());
             intent.putExtra("rating",movieList.get(position).getRating());
             context.startActivity(intent);

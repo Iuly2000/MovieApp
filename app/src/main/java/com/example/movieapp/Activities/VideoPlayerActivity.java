@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.WindowManager;
 
 import com.example.movieapp.R;
 import com.google.android.exoplayer2.BasePlayer;
@@ -29,9 +31,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
-
         videoPlayer = findViewById(R.id.exoPlayer);
         setUpExoPlayer(getIntent().getStringExtra("url"));
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     private void setUpExoPlayer(String url) {

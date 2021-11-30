@@ -54,7 +54,7 @@ public class MovieActivity extends AppCompatActivity {
             Intent intent = new Intent(this, VideoPlayerActivity.class);
             intent.putExtra("url", currentMovie.getLink());
             startActivity(intent);
-            
+
         });
     }
 }
