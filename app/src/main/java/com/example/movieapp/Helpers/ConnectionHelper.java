@@ -19,7 +19,7 @@ public class ConnectionHelper extends Application {
 
     public Connection connectionClass() {
         try {
-            ipString = "192.168.80.165";
+            ipString = "192.168.0.171";
             this.database = "MovieUp!";
             this.uname = "Iuly";
             this.pass = "test123";

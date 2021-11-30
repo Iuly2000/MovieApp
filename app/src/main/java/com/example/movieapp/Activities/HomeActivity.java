@@ -1,8 +1,11 @@
 package com.example.movieapp.Activities;
 
+import static android.app.PendingIntent.getActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MoviesRecyclerAdapter moviesRecyclerAdapter;
     private List<Movie> moviesList;
+    private List<Movie> bannerMoviesList;
     private MovieDAL movieDAL = new MovieDAL();
     private TabLayout tabLayout;
 
@@ -36,8 +40,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         this.tabLayout = findViewById(R.id.tab_indicator);
+        this.bannerMoviesList = movieDAL.GetTheLast5Movies();
+        this.SetBannerMoviesPagerAdapter(bannerMoviesList);
         this.moviesList = movieDAL.GetAllMovies();
-        this.SetBannerMoviesPagerAdapter(moviesList);
         this.SetMoviesRecyclerAdapter(moviesList);
     }
 
@@ -63,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public void run() {
             HomeActivity.this.runOnUiThread(() -> {
-                if (viewPager.getCurrentItem() < moviesList.size() - 1) {
+                if (viewPager.getCurrentItem() < bannerMoviesList.size() - 1) {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 } else {
                     viewPager.setCurrentItem(0);

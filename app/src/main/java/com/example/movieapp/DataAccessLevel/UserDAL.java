@@ -45,10 +45,11 @@ public class UserDAL {
                 return null;
             }
 
-            callableStatement = connect.prepareCall("{call GetAllUsers(?,?,?)}");
-            callableStatement.registerOutParameter(1, Types.VARCHAR);
+            callableStatement = connect.prepareCall("{call GetAllUsers(?,?,?,?)}");
+            callableStatement.registerOutParameter(1, Types.INTEGER);
             callableStatement.registerOutParameter(2, Types.VARCHAR);
             callableStatement.registerOutParameter(3, Types.VARCHAR);
+            callableStatement.registerOutParameter(4, Types.VARCHAR);
 
             boolean hadResults = callableStatement.execute();
 
@@ -56,8 +57,8 @@ public class UserDAL {
                 ResultSet resultSet = callableStatement.getResultSet();
 
                 while (resultSet.next()) {
-                    users.add(new User(resultSet.getString(1),
-                            resultSet.getString(2), resultSet.getString(3)));
+                    users.add(new User(resultSet.getInt(1), resultSet.getString(2),
+                            resultSet.getString(3), resultSet.getString(4)));
                 }
                 hadResults = callableStatement.getMoreResults();
             }

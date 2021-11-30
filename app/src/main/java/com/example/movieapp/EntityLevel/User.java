@@ -1,11 +1,17 @@
 package com.example.movieapp.EntityLevel;
 
 public class User {
-
+private int userID;
     private String username;
     private String password;
     private String email;
 
+    public User(int userID, String username, String password, String email) {
+        this.userID = userID;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
@@ -39,5 +45,13 @@ public class User {
     public void setEmail(String email) {
 
         this.email = email;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }
