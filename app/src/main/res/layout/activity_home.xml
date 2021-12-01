@@ -7,9 +7,13 @@
     android:background="@drawable/home_background"
     tools:context=".Activities.HomeActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,10 +104,6 @@
                 tools:layout_editor_absoluteY="422dp" />
         </RelativeLayout>
 
-        <ScrollView
-            android:id="@+id/scrollView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/movies_layout"
@@ -116,9 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
-        </ScrollView>
+
     </LinearLayout>
-
-
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
