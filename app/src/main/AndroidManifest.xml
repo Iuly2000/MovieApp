@@ -14,12 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieApp">
         <activity
+            android:name=".Activities.AccountSettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_account_settings"
+            android:theme="@style/Theme.MovieApp.NoActionBar" />
+        <activity
             android:name=".Activities.VideoPlayerActivity"
-            android:screenOrientation="landscape"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Activities.MovieActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.LoginActivity"
             android:exported="true"

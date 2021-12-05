@@ -18,12 +18,14 @@ import com.example.movieapp.R;
 import java.util.List;
 
 public class MoviesPagerAdapter extends PagerAdapter {
-    Context context;
-    List<Movie> movieList;
+    private final Context context;
+    private final List<Movie> movieList;
+    private final int userID;
 
-    public MoviesPagerAdapter(Context context, List<Movie> movieList) {
+    public MoviesPagerAdapter(Context context, List<Movie> movieList,int userID) {
         this.context = context;
         this.movieList = movieList;
+        this.userID=userID;
     }
 
     @Override
@@ -58,6 +60,7 @@ public class MoviesPagerAdapter extends PagerAdapter {
             intent.putExtra("link",movieList.get(position).getLink());
             intent.putExtra("releaseYear",movieList.get(position).getReleaseYear());
             intent.putExtra("rating",movieList.get(position).getRating());
+            intent.putExtra("userID",userID);
             context.startActivity(intent);
         });
         return view;

@@ -19,7 +19,7 @@ public class ConnectionHelper extends Application {
 
     public Connection connectionClass() {
         try {
-            ipString = "192.168.0.171";
+            ipString = "192.168.82.223";
             this.database = "MovieUp!";
             this.uname = "Iuly";
             this.pass = "test123";
@@ -39,28 +39,4 @@ public class ConnectionHelper extends Application {
         return this.connection;
     }
 
-//    public void getLocalIpAddress() {
-//        try {
-//            for (Enumeration<NetworkInterface> en = NetworkInterface
-//                    .getNetworkInterfaces(); en.hasMoreElements(); ) {
-//                NetworkInterface intf = en.nextElement();
-//                for (Enumeration<InetAddress> enumIpAddr = intf
-//                        .getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-//                    InetAddress inetAddress = enumIpAddr.nextElement();
-//                    System.out.println("ip1--:" + inetAddress);
-//                    System.out.println("ip2--:" + inetAddress.getHostAddress());
-//
-//                    // for getting IPV4 format
-//                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
-//
-//                        String ip = inetAddress.getHostAddress();
-//                        System.out.println("ip---::" + ip);
-//                        this.ipString = ip;
-//                    }
-//                }
-//            }
-//        } catch (Exception ex) {
-//            Log.e("IP Address", ex.toString());
-//        }
-//    }
 }

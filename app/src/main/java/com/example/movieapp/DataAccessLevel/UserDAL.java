@@ -75,12 +75,12 @@ public class UserDAL {
         return users;
     }
 
-    public boolean VerifiedUser(String username, String password) {
+    public User VerifiedUser(String username, String password) {
         ArrayList<User> users = GetAllUsers();
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password))
-                return true;
+                return user;
         }
-        return false;
+        return null;
     }
 }

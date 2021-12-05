@@ -49,4 +49,40 @@ public class CategoryDAL {
         }
         return categories;
     }
+
+    public ArrayList<String> GetAllCategoriesNames() {
+        CallableStatement callableStatement = null;
+        ArrayList<String> categoriesNames = new ArrayList<>();
+        try {
+            ConnectionHelper connectionHelper = new ConnectionHelper();
+            connect = connectionHelper.connectionClass();
+            if (connect == null) {
+                return null;
+            }
+
+            callableStatement = connect.prepareCall("{call GetAllCategoriesNames(?)}");
+            callableStatement.registerOutParameter(1, Types.VARCHAR);
+
+            boolean hadResults = callableStatement.execute();
+
+            while (hadResults) {
+                ResultSet resultSet = callableStatement.getResultSet();
+
+                while (resultSet.next()) {
+                    categoriesNames.add(resultSet.getString(1));
+                }
+                hadResults = callableStatement.getMoreResults();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert callableStatement != null;
+                callableStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return categoriesNames;
+    }
 }

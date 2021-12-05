@@ -20,12 +20,14 @@ import com.example.movieapp.R;
 import java.util.List;
 
 public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAdapter.MyViewHolder> {
-    Context context;
-    List<Movie> movieList;
+    private final Context context;
+    private final List<Movie> movieList;
+    private final int userID;
 
-    public MoviesRecyclerAdapter(Context context, List<Movie> movieList) {
+    public MoviesRecyclerAdapter(Context context, List<Movie> movieList,int userID) {
         this.context = context;
         this.movieList = movieList;
+        this.userID=userID;
     }
 
     @NonNull
@@ -44,13 +46,14 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
         Glide.with(context).load(movieList.get(position).getImage()).into(holder.image);
         holder.image.setOnClickListener(v -> {
             Intent intent= new Intent(context, MovieActivity.class);
-            intent.putExtra("movieID",movieList.get(position).getMovie_id());
+            intent.putExtra("movieID",movieList.get(position).getMovie_id());            ;
             intent.putExtra("name",movieList.get(position).getName());
             intent.putExtra("description",movieList.get(position).getDescription());
             intent.putExtra("image",movieList.get(position).getImage());
             intent.putExtra("link",movieList.get(position).getLink());
             intent.putExtra("releaseYear",movieList.get(position).getReleaseYear());
             intent.putExtra("rating",movieList.get(position).getRating());
+            intent.putExtra("userID",userID);
             context.startActivity(intent);
         });
     }

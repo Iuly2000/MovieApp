@@ -16,4 +16,10 @@
         <item name="android:actionBarTheme">?attr/colorPrimary</item>
 
     </style>
+    <style name="Theme.MovieApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.MovieApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.MovieApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

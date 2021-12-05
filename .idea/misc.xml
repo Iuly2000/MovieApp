@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable-anydpi/ic_down.xml" value="0.1" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1125" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable-v24/unselected.xml" value="0.1140625" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable-v24/viewtextrounded.xml" value="0.1125" />
@@ -10,10 +11,12 @@
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable/edittextrounded.xml" value="0.7714285714285715" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1125" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable/selected.xml" value="0.1" />
+        <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable/style_spinner.xml" value="0.2203125" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable/white_rounded.xml" value="0.2203125" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable/white_rounded_bottom.xml" value="0.2203125" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/drawable/white_rounded_top.xml" value="0.2203125" />
-        <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/activity_home.xml" value="0.5" />
+        <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/activity_account_settings.xml" value="0.33" />
+        <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/activity_home.xml" value="0.2594670406732118" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/activity_movie.xml" value="0.25" />
@@ -24,6 +27,7 @@
         <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/movie_and_description_layout.xml" value="0.18" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/movie_full_description_layout.xml" value="0.25" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/movie_short_description_layout.xml" value="0.25" />
+        <entry key="..\:/DAM/MovieApp/app/src/main/res/layout/style_spinner.xml" value="0.20416666666666666" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2203125" />
         <entry key="..\:/DAM/MovieApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1140625" />
       </map>

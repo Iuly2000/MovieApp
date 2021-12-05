@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+
         Button loginButton = findViewById(R.id.loginButtonLogin);
         loginButton.setOnClickListener(this::VerifyUser);
         Button registerButton = findViewById(R.id.registerButtonLogin);
@@ -39,10 +39,14 @@ public class LoginActivity extends AppCompatActivity {
     public void VerifyUser(View v) {
         TextView username = findViewById(R.id.usernameTextLogin);
         TextView password = findViewById(R.id.passwordTextLogin);
-
-        if (this.userDAL.VerifiedUser(username.getText().toString(), password.getText().toString())) {
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            this.finish();
+        User currentUser = this.userDAL.VerifiedUser(username.getText().toString(), password.getText().toString());
+        if (currentUser!=null) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("userID", currentUser.getUserID());
+            intent.putExtra("username", currentUser.getUsername());
+            intent.putExtra("password", currentUser.getPassword());
+            intent.putExtra("email", currentUser.getEmail());
+            startActivity(intent);
         } else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Username/Password are incorrect!");

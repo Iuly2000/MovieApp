@@ -40,7 +40,7 @@ public class MovieDAL {
                 while (resultSet.next()) {
                     movies.add(new Movie(
                             resultSet.getInt(1),
-                             resultSet.getString(2),
+                            resultSet.getString(2),
                             resultSet.getString(3),
                             resultSet.getString(4),
                             resultSet.getString(5),
@@ -109,5 +109,14 @@ public class MovieDAL {
             }
         }
         return movies;
+    }
+
+    public ArrayList<Movie> SearchMoviesByWord(String word) {
+        ArrayList<Movie> searchedMovies = new ArrayList<>();
+        for (Movie movie : this.GetAllMovies()) {
+            if (movie.getName().toUpperCase().contains(word))
+                searchedMovies.add(movie);
+        }
+        return searchedMovies;
     }
 }
