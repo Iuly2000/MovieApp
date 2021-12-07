@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D72E6895"
+    android:background="#88AAF8"
     tools:context=".Activities.MovieActivity">
 
     <ScrollView
@@ -101,20 +101,6 @@
                 android:background="@drawable/viewtextrounded"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="5dp"
-                android:isIndicator="true"
-                android:numStars="10"
-                android:progressBackgroundTint="@color/white"
-                android:progressTint="@color/black"
-                android:transformPivotX="0dp"
-                android:transformPivotY="35dp" />
 
             </LinearLayout>
 

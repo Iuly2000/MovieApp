@@ -1,7 +1,6 @@
 package com.example.movieapp.DataAccessLevel;
 
 import com.example.movieapp.EntityLevel.Movie;
-import com.example.movieapp.EntityLevel.User;
 import com.example.movieapp.Helpers.ConnectionHelper;
 
 import java.sql.CallableStatement;
@@ -12,36 +11,15 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 public class MovieCategoriesDAL {
-    private Connection connect;
+    private static Connection connect;
 
-    public void InsertMovieCategory(int movieID,int categoryID) {
-        CallableStatement callableStatement = null;
-        try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-
-            callableStatement = connect.prepareCall("{call InsertMovieCategory(?,?)}");
-            callableStatement.setInt("@movie_id", movieID);
-            callableStatement.setInt("@categoryID", categoryID);
-            callableStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert callableStatement != null;
-                callableStatement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-    }
-    public ArrayList<Movie> GetMoviesByCategory(String categoryName) {
+    public static ArrayList<Movie> getMoviesByCategory(String categoryName) {
         CallableStatement callableStatement = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
-            this.connect = connectionHelper.connectionClass();
-            if (this.connect == null) {
+            connect = connectionHelper.connectionClass();
+            if (connect == null) {
                 return null;
             }
 
@@ -85,13 +63,13 @@ public class MovieCategoriesDAL {
         return movies;
     }
 
-    public ArrayList<String> GetCategoriesNamesForMovie(int movieID) {
+    public static ArrayList<String> getCategoriesNamesForMovie(int movieID) {
         CallableStatement callableStatement = null;
         ArrayList<String> categoriesNames = new ArrayList<>();
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
-            this.connect = connectionHelper.connectionClass();
-            if (this.connect == null) {
+            connect = connectionHelper.connectionClass();
+            if (connect == null) {
                 return null;
             }
 

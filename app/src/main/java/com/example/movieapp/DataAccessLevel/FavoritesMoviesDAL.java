@@ -11,11 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FavoritesMoviesDAL {
-    private Connection connect;
+    private static Connection connect;
 
-    public void InsertFavoriteMovie(int userID, int movieID) {
+    public static void insertFavoriteMovie(int userID, int movieID) {
         CallableStatement callableStatement = null;
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
@@ -37,7 +38,7 @@ public class FavoritesMoviesDAL {
         }
     }
 
-    public void DeleteFavoriteMovie(int userID, int movieID) {
+    public static void deleteFavoriteMovie(int userID, int movieID) {
         CallableStatement callableStatement = null;
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
@@ -59,13 +60,13 @@ public class FavoritesMoviesDAL {
         }
     }
 
-    public ArrayList<Pair<Integer, Integer>> GetAllFavoriteMovies() {
+    public static ArrayList<Pair<Integer, Integer>> getAllFavoriteMovies() {
         CallableStatement callableStatement = null;
         ArrayList<Pair<Integer, Integer>> favoriteMovies = new ArrayList<>();
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
-            this.connect = connectionHelper.connectionClass();
-            if (this.connect == null) {
+            connect = connectionHelper.connectionClass();
+            if (connect == null) {
                 return null;
             }
 
@@ -96,21 +97,21 @@ public class FavoritesMoviesDAL {
         return favoriteMovies;
     }
 
-    public boolean CheckIfFavorite(int userID, int movieID) {
-        for (Pair<Integer, Integer> favoriteMovie : this.GetAllFavoriteMovies()) {
+    public static boolean checkIfFavorite(int userID, int movieID) {
+        for (Pair<Integer, Integer> favoriteMovie : Objects.requireNonNull(getAllFavoriteMovies())) {
             if (favoriteMovie.first == userID && favoriteMovie.second == movieID)
                 return true;
         }
         return false;
     }
 
-    public ArrayList<Movie> GetFavoriteMoviesForUser(Integer userID) {
+    public static ArrayList<Movie> getFavoriteMoviesForUser(Integer userID) {
         CallableStatement callableStatement = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
-            this.connect = connectionHelper.connectionClass();
-            if (this.connect == null) {
+            connect = connectionHelper.connectionClass();
+            if (connect == null) {
                 return null;
             }
 

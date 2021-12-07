@@ -11,51 +11,13 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 public class CategoryDAL {
-    private Connection connect;
 
-    public ArrayList<Category> GetAllCategories() {
-        CallableStatement callableStatement = null;
-        ArrayList<Category> categories = new ArrayList<>();
-        try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            if (connect == null) {
-                return null;
-            }
-
-            callableStatement = connect.prepareCall("{call GetAllCategories(?,?)}");
-            callableStatement.registerOutParameter(1, Types.INTEGER);
-            callableStatement.registerOutParameter(2, Types.VARCHAR);
-
-            boolean hadResults = callableStatement.execute();
-
-            while (hadResults) {
-                ResultSet resultSet = callableStatement.getResultSet();
-
-                while (resultSet.next()) {
-                    categories.add(new Category(resultSet.getInt(1), resultSet.getString(2)));
-                }
-                hadResults = callableStatement.getMoreResults();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert callableStatement != null;
-                callableStatement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-        return categories;
-    }
-
-    public ArrayList<String> GetAllCategoriesNames() {
+    public static ArrayList<String> getAllCategoriesNames() {
         CallableStatement callableStatement = null;
         ArrayList<String> categoriesNames = new ArrayList<>();
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
+            Connection connect = connectionHelper.connectionClass();
             if (connect == null) {
                 return null;
             }

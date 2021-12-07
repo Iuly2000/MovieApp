@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -21,28 +20,24 @@ import java.util.ArrayList;
 
 public class MovieActivity extends AppCompatActivity {
 
-    private RatingBar ratingBar;
     private TextView movieDescription, ratingText, releaseText, movieName, categoriesNames;
     private ImageView image;
     private Button playButton;
     private Movie currentMovie;
     private CheckBox favoriteMovieCheckbox;
     private int userID;
-    private final MovieCategoriesDAL movieCategoriesDAL = new MovieCategoriesDAL();
-    private final FavoritesMoviesDAL favoritesMoviesDAL = new FavoritesMoviesDAL();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
-        this.SetFindViewByID();
-        this.SetCurrentMovie();
+        this.setFindViewByID();
+        this.setCurrentMovie();
         this.userID=getIntent().getIntExtra("userID", 0);
-        this.favoriteMovieCheckbox.setChecked(favoritesMoviesDAL.CheckIfFavorite(userID,currentMovie.getMovie_id()));
-        OnCheckBoxClick();
-        this.categoriesNames.setText(this.SetCategoriesNames(movieCategoriesDAL.GetCategoriesNamesForMovie(currentMovie.getMovie_id())));
+        this.favoriteMovieCheckbox.setChecked(FavoritesMoviesDAL.checkIfFavorite(userID,currentMovie.getMovie_id()));
+        onCheckBoxClick();
+        this.categoriesNames.setText(this.setCategoriesNames(MovieCategoriesDAL.getCategoriesNamesForMovie(currentMovie.getMovie_id())));
         this.movieName.setText(currentMovie.getName());
-        this.ratingBar.setRating(currentMovie.getRating());
         this.movieDescription.setText(currentMovie.getDescription());
         this.ratingText.setText(Float.toString(currentMovie.getRating()));
         this.releaseText.setText(Integer.toString(currentMovie.getReleaseYear()));
@@ -55,19 +50,19 @@ public class MovieActivity extends AppCompatActivity {
 
         });
     }
-    private void OnCheckBoxClick(){
+    private void onCheckBoxClick(){
         this.favoriteMovieCheckbox.setOnClickListener(v->{
             if(this.favoriteMovieCheckbox.isChecked()){
-                this.favoritesMoviesDAL.InsertFavoriteMovie(this.userID,this.currentMovie.getMovie_id());
+                FavoritesMoviesDAL.insertFavoriteMovie(this.userID,this.currentMovie.getMovie_id());
             }
             else
             {
-                this.favoritesMoviesDAL.DeleteFavoriteMovie(this.userID,this.currentMovie.getMovie_id());
+                FavoritesMoviesDAL.deleteFavoriteMovie(this.userID,this.currentMovie.getMovie_id());
             }
         });
     }
 
-    private String SetCategoriesNames(ArrayList<String> categoriesNames) {
+    private String setCategoriesNames(ArrayList<String> categoriesNames) {
         StringBuilder categoriesNamesString = new StringBuilder();
         for (String categoryName : categoriesNames) {
             categoriesNamesString.append(categoryName).append(", ");
@@ -76,7 +71,7 @@ public class MovieActivity extends AppCompatActivity {
         return categoriesNamesString.toString();
     }
 
-    private void SetCurrentMovie() {
+    private void setCurrentMovie() {
         currentMovie = new Movie(
                 getIntent().getIntExtra("movieID", 0),
                 getIntent().getStringExtra("name"),
@@ -87,9 +82,8 @@ public class MovieActivity extends AppCompatActivity {
                 getIntent().getFloatExtra("rating", 0)
         );
     }
-    private void SetFindViewByID(){
+    private void setFindViewByID(){
         this.movieName = findViewById(R.id.movie_name_label);
-        this.ratingBar = findViewById(R.id.ratingBar);
         this.movieDescription = findViewById(R.id.movie_description);
         this.ratingText = findViewById(R.id.ratingText);
         this.releaseText = findViewById(R.id.releaseText);

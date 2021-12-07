@@ -11,15 +11,15 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 public class MovieDAL {
-    private Connection connect;
+    private static Connection connect;
 
-    public ArrayList<Movie> GetAllMovies() {
+    public static ArrayList<Movie> getAllMovies() {
         CallableStatement callableStatement = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
-            this.connect = connectionHelper.connectionClass();
-            if (this.connect == null) {
+            connect = connectionHelper.connectionClass();
+            if (connect == null) {
                 return null;
             }
 
@@ -62,13 +62,13 @@ public class MovieDAL {
         return movies;
     }
 
-    public ArrayList<Movie> GetTheLast5Movies() {
+    public static ArrayList<Movie> getTheLast5Movies() {
         CallableStatement callableStatement = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
-            this.connect = connectionHelper.connectionClass();
-            if (this.connect == null) {
+            connect = connectionHelper.connectionClass();
+            if (connect == null) {
                 return null;
             }
 
@@ -111,9 +111,9 @@ public class MovieDAL {
         return movies;
     }
 
-    public ArrayList<Movie> SearchMoviesByWord(String word) {
+    public static ArrayList<Movie> searchMoviesByWord(String word) {
         ArrayList<Movie> searchedMovies = new ArrayList<>();
-        for (Movie movie : this.GetAllMovies()) {
+        for (Movie movie : getAllMovies()) {
             if (movie.getName().toUpperCase().contains(word))
                 searchedMovies.add(movie);
         }

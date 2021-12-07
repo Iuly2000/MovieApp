@@ -1,65 +1,60 @@
 package com.example.movieapp.Activities;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.wifi.WifiManager;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.text.format.Formatter;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.movieapp.DataAccessLevel.UserDAL;
 import com.example.movieapp.EntityLevel.User;
 import com.example.movieapp.R;
 
-import java.util.ArrayList;
-
 public class LoginActivity extends AppCompatActivity {
-    UserDAL userDAL = new UserDAL();
-
+    Button loginButton,registerButton;
+    private ProgressDialog pd = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        Button loginButton = findViewById(R.id.loginButtonLogin);
-        loginButton.setOnClickListener(this::VerifyUser);
-        Button registerButton = findViewById(R.id.registerButtonLogin);
-        registerButton.setOnClickListener(this::ChangeToRegister);
+         loginButton = findViewById(R.id.loginButtonLogin);
+         registerButton = findViewById(R.id.registerButtonLogin);
+         loginButton.setOnClickListener(this::verifyUser);
+         registerButton.setOnClickListener(this::changeToRegister);
     }
 
-    public void VerifyUser(View v) {
+
+    public void verifyUser(View v) {
         TextView username = findViewById(R.id.usernameTextLogin);
         TextView password = findViewById(R.id.passwordTextLogin);
-        User currentUser = this.userDAL.VerifiedUser(username.getText().toString(), password.getText().toString());
+        User currentUser = UserDAL.verifiedUser(username.getText().toString(), password.getText().toString());
         if (currentUser!=null) {
-            Intent intent = new Intent(this, HomeActivity.class);
+            this.pd = ProgressDialog.show(this, "Movie Up!",
+                    "Loading...Please wait...", true, false);
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             intent.putExtra("userID", currentUser.getUserID());
-            intent.putExtra("username", currentUser.getUsername());
-            intent.putExtra("password", currentUser.getPassword());
-            intent.putExtra("email", currentUser.getEmail());
             startActivity(intent);
         } else {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("Username/Password are incorrect!");
-            builder1.setNegativeButton(
-                    "OK",
-                    (dialog, id) -> dialog.cancel());
-            AlertDialog loginAlert = builder1.create();
-            loginAlert.show();
+            Toast.makeText(this, "Username/Password are incorrect!",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
-    public void ChangeToRegister(View v) {
+    public void changeToRegister(View v) {
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(this.pd!=null && this.pd.isShowing()){
+
+            this.pd.dismiss();
+        }
+    }
 }

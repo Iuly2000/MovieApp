@@ -37,7 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.RegisterActivity" />
-        <activity android:name=".Activities.HomeActivity" />
+        <activity android:name=".Activities.HomeActivity"
+            android:configChanges="orientation|screenSize"/>
 
         <meta-data
             android:name="preloaded_fonts"

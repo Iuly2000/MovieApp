@@ -133,10 +133,24 @@
                 tools:layout_editor_absoluteX="178dp"
                 tools:layout_editor_absoluteY="422dp" />
 
-            <Spinner
-                android:id="@+id/category_spinner"
+            <TextView
+                android:id="@+id/category_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/category"
+                android:textColor="@color/black"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="60dp"
+
+                android:textSize="20sp">
+
+            </TextView>
+
+            <Spinner
+                android:id="@+id/category_spinner"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="20dp"
