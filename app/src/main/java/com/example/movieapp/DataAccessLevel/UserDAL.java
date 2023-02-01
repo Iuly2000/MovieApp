@@ -8,18 +8,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
 
 public class UserDAL {
-    private static Connection connect;
-
     public static void insertUser(User user) {
         CallableStatement callableStatement = null;
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-
-            callableStatement = connect.prepareCall("{call InsertUser(?,?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call InsertUser(?,?,?)}");
             callableStatement.setString("@username", user.getUsername());
             callableStatement.setString("@password", user.getPassword());
             callableStatement.setString("@email", user.getEmail());
@@ -40,9 +34,7 @@ public class UserDAL {
         CallableStatement callableStatement = null;
         User user = null;
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            callableStatement = connect.prepareCall("{call GetUserById(?,?,?,?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call GetUserById(?,?,?,?,?)}");
             callableStatement.setInt("@id", user_id);
             callableStatement.registerOutParameter(2, Types.INTEGER);
             callableStatement.registerOutParameter(3, Types.VARCHAR);
@@ -76,9 +68,7 @@ public class UserDAL {
         CallableStatement callableStatement = null;
         User user = null;
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            callableStatement = connect.prepareCall("{call GetUserByUsername(?,?,?,?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call GetUserByUsername(?,?,?,?,?)}");
             callableStatement.setString("@username_searched", username);
             callableStatement.registerOutParameter(2, Types.INTEGER);
             callableStatement.registerOutParameter(3, Types.VARCHAR);
@@ -112,10 +102,7 @@ public class UserDAL {
     public static void updateUser(User user) {
         CallableStatement callableStatement = null;
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-
-            callableStatement = connect.prepareCall("{call UpdateUser(?,?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call UpdateUser(?,?,?)}");
             callableStatement.setInt("@user_id", user.getUserID());
             callableStatement.setString("@password", user.getPassword());
             callableStatement.setString("@email", user.getEmail());

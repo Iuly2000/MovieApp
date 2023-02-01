@@ -4,26 +4,18 @@ import com.example.movieapp.EntityLevel.Movie;
 import com.example.movieapp.Helpers.ConnectionHelper;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 
 public class MovieCategoriesDAL {
-    private static Connection connect;
 
     public static ArrayList<Movie> getMoviesByCategory(String categoryName) {
         CallableStatement callableStatement = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            if (connect == null) {
-                return null;
-            }
-
-            callableStatement = connect.prepareCall("{call GetMoviesByCategory(?,?,?,?,?,?,?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call GetMoviesByCategory(?,?,?,?,?,?,?,?)}");
             callableStatement.setString("@category_name",categoryName);
             callableStatement.registerOutParameter(2, Types.INTEGER);
             callableStatement.registerOutParameter(3, Types.VARCHAR);
@@ -67,13 +59,7 @@ public class MovieCategoriesDAL {
         CallableStatement callableStatement = null;
         ArrayList<String> categoriesNames = new ArrayList<>();
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            if (connect == null) {
-                return null;
-            }
-
-            callableStatement = connect.prepareCall("{call GetCategoriesNamesForMovie(?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call GetCategoriesNamesForMovie(?,?)}");
             callableStatement.setInt("@movie_id",movieID);
             callableStatement.registerOutParameter(2, Types.VARCHAR);
 

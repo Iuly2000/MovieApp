@@ -1,12 +1,15 @@
 package com.example.movieapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.movieapp.DataAccessLevel.UserDAL;
 import com.example.movieapp.EntityLevel.User;
 import com.example.movieapp.R;
@@ -33,41 +36,47 @@ public class AccountSettingsActivity extends AppCompatActivity {
         this.updateButton = findViewById(R.id.updateButtonAccount);
         this.newPasswordCheckBox = findViewById(R.id.add_new_password_checkbox);
         this.emailCheckBox = findViewById(R.id.add_email_checkbox);
-        updateButton.setOnClickListener(v ->
-        {
+        updateButton.setOnClickListener(this::verifyUserChanges);
+    }
+
+    private void setCurrentUser() {
+        this.currentUser = UserDAL.GetUserById(getIntent().getIntExtra("userID", 0));
+    }
+
+    private void verifyUserChanges(View v)
+    {
             String password = this.userNewPassword.getText().toString();
             String email = this.userNewEmail.getText().toString();
             if (!this.currentUser.getPassword().equals(this.userPassword.getText().toString())) {
                 Toast.makeText(this, "Password is incorrect!",
                         Toast.LENGTH_LONG).show();
                 return;
-            } else if (password.equals("") && this.newPasswordCheckBox.isChecked()) {
+            }
+            if (!this.newPasswordCheckBox.isChecked() && !this.emailCheckBox.isChecked()) {
+                Toast.makeText(this, "You have to check at least one option!",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
+            if (password.equals("") && this.newPasswordCheckBox.isChecked()) {
                 Toast.makeText(this, "New Password can not be empty!",
                         Toast.LENGTH_LONG).show();
                 return;
-            } else if (email.equals("") && this.emailCheckBox.isChecked()) {
-                Toast.makeText(this, "Email can not be empty!",
+            }
+            if(!email.contains("@")){
+                Toast.makeText(this, "Email must contain @!",
                         Toast.LENGTH_LONG).show();
                 return;
-            } else if (this.newPasswordCheckBox.isChecked() && this.emailCheckBox.isChecked()) {
+            }
+            if (this.newPasswordCheckBox.isChecked() && this.emailCheckBox.isChecked()) {
                 this.currentUser.setPassword(password);
                 this.currentUser.setEmail(email);
             } else if (this.newPasswordCheckBox.isChecked()) {
                 this.currentUser.setPassword(password);
             } else if (this.emailCheckBox.isChecked()) {
                 this.currentUser.setEmail(email);
-            } else if(!this.newPasswordCheckBox.isChecked() && !this.emailCheckBox.isChecked()){
-                Toast.makeText(this, "You have to check at least one option!",
-                        Toast.LENGTH_LONG).show();
-                return;
             }
 
             UserDAL.updateUser(this.currentUser);
             this.finish();
-        });
-    }
-
-    private void setCurrentUser() {
-        this.currentUser = UserDAL.GetUserById(getIntent().getIntExtra("userID", 0));
     }
 }

@@ -48,12 +48,17 @@ public class VideoPlayerActivity extends AppCompatActivity {
             document = Jsoup.connect(url).followRedirects(false).timeout(60000).get();
         } catch (IOException e) {
             e.printStackTrace();
+            return;
         }
         assert document != null;
-        String value = document.body().select("video").get(0).select("source").get(0).attr("src");
+        String value = document.body().
+                select("video").get(0).
+                select("source").get(0).attr("src");
 
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, "MovieApp"));
-        MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(value));
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory
+                (this, Util.getUserAgent(this, "MovieApp"));
+        MediaSource mediaSource = new ExtractorMediaSource.Factory
+                (dataSourceFactory).createMediaSource(Uri.parse(value));
         simpleExoPlayer.prepare(mediaSource);
         simpleExoPlayer.setPlayWhenReady(true);
     }

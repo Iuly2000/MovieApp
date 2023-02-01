@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">MovieUp!</string>
-    <string name="login_button">Login!</string>
-    <string name="register_button">Register!</string>
-    <string name="update_button">Update!</string>
+    <string name="app_name">MovieUp</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="update_button">Update</string>
     <string name="password">Password</string>
     <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="category">Category</string>

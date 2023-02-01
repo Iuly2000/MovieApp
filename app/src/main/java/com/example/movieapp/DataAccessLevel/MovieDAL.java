@@ -4,26 +4,19 @@ import com.example.movieapp.EntityLevel.Movie;
 import com.example.movieapp.Helpers.ConnectionHelper;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MovieDAL {
-    private static Connection connect;
 
     public static ArrayList<Movie> getAllMovies() {
         CallableStatement callableStatement = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            if (connect == null) {
-                return null;
-            }
-
-            callableStatement = connect.prepareCall("{call GetAllMovies(?,?,?,?,?,?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call GetAllMovies(?,?,?,?,?,?,?)}");
             callableStatement.registerOutParameter(1, Types.INTEGER);
             callableStatement.registerOutParameter(2, Types.VARCHAR);
             callableStatement.registerOutParameter(3, Types.VARCHAR);
@@ -66,13 +59,7 @@ public class MovieDAL {
         CallableStatement callableStatement = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            if (connect == null) {
-                return null;
-            }
-
-            callableStatement = connect.prepareCall("{call GetTheLast5Movies(?,?,?,?,?,?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call GetTheLast5Movies(?,?,?,?,?,?,?)}");
             callableStatement.registerOutParameter(1, Types.INTEGER);
             callableStatement.registerOutParameter(2, Types.VARCHAR);
             callableStatement.registerOutParameter(3, Types.VARCHAR);
@@ -113,7 +100,7 @@ public class MovieDAL {
 
     public static ArrayList<Movie> searchMoviesByWord(String word) {
         ArrayList<Movie> searchedMovies = new ArrayList<>();
-        for (Movie movie : getAllMovies()) {
+        for (Movie movie : Objects.requireNonNull(getAllMovies())) {
             if (movie.getName().toUpperCase().contains(word))
                 searchedMovies.add(movie);
         }

@@ -2,6 +2,7 @@ package com.example.movieapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -27,6 +28,7 @@ public class MovieActivity extends AppCompatActivity {
     private CheckBox favoriteMovieCheckbox;
     private int userID;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +36,11 @@ public class MovieActivity extends AppCompatActivity {
         this.setFindViewByID();
         this.setCurrentMovie();
         this.userID=getIntent().getIntExtra("userID", 0);
-        this.favoriteMovieCheckbox.setChecked(FavoritesMoviesDAL.checkIfFavorite(userID,currentMovie.getMovie_id()));
+        this.favoriteMovieCheckbox.setChecked(FavoritesMoviesDAL.
+                checkIfFavorite(userID,currentMovie.getMovie_id()));
         onCheckBoxClick();
-        this.categoriesNames.setText(this.setCategoriesNames(MovieCategoriesDAL.getCategoriesNamesForMovie(currentMovie.getMovie_id())));
+        this.categoriesNames.setText(this.setCategoriesNames
+                (MovieCategoriesDAL.getCategoriesNamesForMovie(currentMovie.getMovie_id())));
         this.movieName.setText(currentMovie.getName());
         this.movieDescription.setText(currentMovie.getDescription());
         this.ratingText.setText(Float.toString(currentMovie.getRating()));
@@ -67,7 +71,8 @@ public class MovieActivity extends AppCompatActivity {
         for (String categoryName : categoriesNames) {
             categoriesNamesString.append(categoryName).append(", ");
         }
-        categoriesNamesString.delete(categoriesNamesString.length() - 2, categoriesNamesString.length() - 1);
+        categoriesNamesString.
+                delete(categoriesNamesString.length() - 2, categoriesNamesString.length() - 1);
         return categoriesNamesString.toString();
     }
 

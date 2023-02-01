@@ -1,5 +1,6 @@
 package com.example.movieapp.Helpers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
         return new MyViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.textRating.setText(Float.toString(this.movieList.get(position).getRating()));
@@ -46,7 +48,7 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<MoviesRecyclerAd
         Glide.with(context).load(movieList.get(position).getImage()).into(holder.image);
         holder.image.setOnClickListener(v -> {
             Intent intent= new Intent(context, MovieActivity.class);
-            intent.putExtra("movieID",movieList.get(position).getMovie_id());            ;
+            intent.putExtra("movieID",movieList.get(position).getMovie_id());
             intent.putExtra("name",movieList.get(position).getName());
             intent.putExtra("description",movieList.get(position).getDescription());
             intent.putExtra("image",movieList.get(position).getImage());

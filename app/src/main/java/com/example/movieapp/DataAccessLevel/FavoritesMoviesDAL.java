@@ -6,7 +6,6 @@ import com.example.movieapp.EntityLevel.Movie;
 import com.example.movieapp.Helpers.ConnectionHelper;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -14,15 +13,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class FavoritesMoviesDAL {
-    private static Connection connect;
 
     public static void insertFavoriteMovie(int userID, int movieID) {
         CallableStatement callableStatement = null;
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-
-            callableStatement = connect.prepareCall("{call InsertFavoriteMovie(?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call InsertFavoriteMovie(?,?)}");
             callableStatement.setInt("@user_id", userID);
             callableStatement.setInt("@movie_id", movieID);
             callableStatement.execute();
@@ -41,10 +36,7 @@ public class FavoritesMoviesDAL {
     public static void deleteFavoriteMovie(int userID, int movieID) {
         CallableStatement callableStatement = null;
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-
-            callableStatement = connect.prepareCall("{call DeleteFavoriteMovie(?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call DeleteFavoriteMovie(?,?)}");
             callableStatement.setInt("@user_id", userID);
             callableStatement.setInt("@movie_id", movieID);
             callableStatement.execute();
@@ -64,13 +56,7 @@ public class FavoritesMoviesDAL {
         CallableStatement callableStatement = null;
         ArrayList<Pair<Integer, Integer>> favoriteMovies = new ArrayList<>();
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            if (connect == null) {
-                return null;
-            }
-
-            callableStatement = connect.prepareCall("{call GetAllFavoriteMovies(?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call GetAllFavoriteMovies(?,?)}");
             callableStatement.registerOutParameter(1, Types.INTEGER);
             callableStatement.registerOutParameter(2, Types.INTEGER);
 
@@ -109,13 +95,7 @@ public class FavoritesMoviesDAL {
         CallableStatement callableStatement = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionClass();
-            if (connect == null) {
-                return null;
-            }
-
-            callableStatement = connect.prepareCall("{call GetFavoriteMoviesForUser(?,?,?,?,?,?,?,?)}");
+            callableStatement = ConnectionHelper.connection.prepareCall("{call GetFavoriteMoviesForUser(?,?,?,?,?,?,?,?)}");
             callableStatement.setInt("@user_id",userID);
             callableStatement.registerOutParameter(2, Types.INTEGER);
             callableStatement.registerOutParameter(3, Types.VARCHAR);

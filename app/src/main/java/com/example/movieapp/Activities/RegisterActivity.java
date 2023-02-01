@@ -26,9 +26,11 @@ public class RegisterActivity extends AppCompatActivity {
     public void registerUser(View v) {
         TextView username = findViewById(R.id.usernameTextRegister);
         TextView password = findViewById(R.id.passwordTextRegister);
+        TextView confirmPassword = findViewById(R.id.passwordConfirmTextRegister);
         TextView email = findViewById(R.id.emailTextRegister);
         String usernameString = username.getText().toString();
         String passwordString = password.getText().toString();
+        String confirmPasswordString = confirmPassword.getText().toString();
         String emailString = email.getText().toString();
 
         if (UserDAL.GetUserByUsername(usernameString) != null) {
@@ -43,6 +45,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if(passwordString.length()<6){
             Toast.makeText(this, "Password must at least have 6 characters!",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(!passwordString.equals(confirmPasswordString)){
+            Toast.makeText(this, "The passwords do not match!",
                     Toast.LENGTH_LONG).show();
             return;
         }

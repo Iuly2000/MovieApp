@@ -80,6 +80,24 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/passwordConfirmTextRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="@color/black"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-black"
+                    android:hint="@string/confirm_password"
+                    android:inputType="textPassword"
+                    android:textColorHint="#252525"
+                    android:textSize="26sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
